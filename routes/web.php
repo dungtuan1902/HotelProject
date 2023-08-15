@@ -47,7 +47,6 @@ Route::middleware(['auth'])->group(function ()  {
     Route::prefix('admin')->group(function (){
         //Dashboard
         Route::match(['get'], '/dashboard', [DashBoardController::class, 'dashboard'])->name('dashboard');
-    
         //User 
         Route::match(['get'], '/user', [UserController::class, 'getAll'])->name('user');
         Route::match(['get','post'], '/user/add', [UserController::class, 'add'])->name('insert');
@@ -133,6 +132,7 @@ Route::middleware(['auth'])->group(function ()  {
         Route::match(['get'], '/post/view-delete-post', [PostController::class, 'view_delete'])->name('view_delete_post');
         Route::match(['get'], '/post/force-delete-post/{id}', [PostController::class, 'force'])->name('force_delete_post');
         Route::match(['get'], '/post/restore-post/{id}', [PostController::class, 'restore'])->name('restore_delete_post');
+        Route::match(['get'], '/post/detail/{id}', [PostController::class, 'detail'])->name('detail_post');
     });
     
     

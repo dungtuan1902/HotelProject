@@ -102,4 +102,8 @@ class PostController extends Controller
         }
         return view('layout.post.edit',compact('post'));
     }
+    public function detail($id)  {
+        $post =Post::find($id);
+        return view('layout.post.detail',compact('post'));
+    }
 }

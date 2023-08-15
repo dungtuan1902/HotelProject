@@ -51,7 +51,7 @@
                                             Image</th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Descrition
+                                            Content
                                         </th>
                                         <th
                                             class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
@@ -78,17 +78,21 @@
                                             </td>
                                             <td class="align-middle  text-sm text-center">
                                                 <img src="{{ $item->image == '' ? '../assets/img/team-2.jpg' : Storage::url($item->image) }}"
-                                               style="width: 150px ; height: 100px; "  alt="user1">
+                                                    style="width: 150px ; height: 100px; " alt="user1">
                                             </td>
-                                            <td class="align-middle  text-sm">
-                                                <p class="text-xs text-secondary mb-0">{{ $item->content }}</p>
+                                            <td class="align-items-start  text-sm">
+                                                <div class="w-100 p-3">
+                                                    <p class="text-xs text-secondary mb-0 ">
+                                                        {{ Str::substr($item->content, 0, 50) . '.....' }}</p>
+                                                </div>
+
                                             </td>
                                             <td class="align-middle text-center">
                                                 <span
                                                     class="text-secondary text-xs font-weight-bold">{{ $item->created_at == '' ? '20/07/2023' : $item->created_at }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a href="{{route('edit_post',['id'=>$item->id])}}"
+                                                <a href="{{ route('edit_post', ['id' => $item->id]) }}"
                                                     class="my-3 btn btn-outline-warning text-warning fw-light text-xs btn-sm"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
@@ -98,6 +102,11 @@
                                                     class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Delete
+                                                </a>
+                                                <a href="{{ route('detail_post', ['id' => $item->id]) }}"
+                                                    class="my-3 btn btn-outline-success text-success text-xs btn-sm"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
+                                                    View
                                                 </a>
                                             </td>
                                         </tr>
