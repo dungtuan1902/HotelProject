@@ -268,7 +268,7 @@
                 <div class="row">
                     @foreach ($post as $item)
                         <div class="col-lg-4">
-                            <div class="blog-item set-bg" data-setbg=" {{ asset(Storage::url($item->image)) }}">
+                            <div class="blog-item set-bg" data-setbg="{{ Storage::url($item->image)}}">
                                 <div class="bi-text">
                                     <h4><a href="#"><span class="b-tag">{{ $item->title }}</span></a></h4>
                                     <div class="b-time"><i class="icon_clock_alt"></i>{{ $item->created_at }}</div>

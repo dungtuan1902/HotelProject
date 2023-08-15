@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashBoardController;
 use App\Http\Controllers\HoaDonController;
+use App\Http\Controllers\ServiceContrller;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PhongController;
 use App\Http\Controllers\LoaiPhongController;
@@ -32,6 +33,7 @@ Route::match(['get','post'], '/', [ClientController::class, 'index'])->name('cli
 Route::match(['get'], '/room', [ClientController::class, 'room'])->name('room_client');
 Route::match(['get'], '/room/detail/{id}', [ClientController::class, 'detail'])->name('detail_room_client');
 Route::match(['get'], '/contact', [ClientController::class, 'contact'])->name('contact_client');
+Route::match(['get'], '/about', [ClientController::class, 'about'])->name('about_client');
 
 
 
@@ -67,17 +69,14 @@ Route::middleware(['auth'])->group(function ()  {
         Route::match(['get'], '/room/view-delete-phong', [PhongController::class, 'view_delete'])->name('view_delete_phong');
         Route::match(['get','post'], '/room/edit/{id}', [PhongController::class, 'edit'])->name('edit_phong');
     
-        //LoaiPhong
-        Route::match(['get'], '/typeroom', [LoaiPhongController::class, 'getAll'])->name('typeroom');
-        Route::match(['get','post'], '/typeroom/add', [LoaiPhongController::class, 'add'])->name('insert_typeroom');
-        Route::match(['get'], '/typeroom/delete/{id}', [LoaiPhongController::class, 'delete'])->name('delete_typeroom');
-        Route::match(['get','post'], '/typeroom/edit/{id}', [LoaiPhongController::class, 'edit'])->name('edit_typeroom');
-        Route::match(['get'], '/typeroom/view-delete-typeroom', [LoaiPhongController::class, 'view_delete'])->name('view_delete_typeroom');
-        Route::match(['get'], '/typeroom/force-delete-typeroom/{id}', [LoaiPhongController::class, 'force_delete'])->name('force_delete_typeroom');
-        Route::match(['get'], '/typeroom/restore-typeroom/{id}', [LoaiPhongController::class, 'restore'])->name('restore_delete_typeroom');
-        
-        
-        
+        //Service
+        Route::match(['get'], '/service', [ServiceContrller::class, 'getAll'])->name('service');
+        Route::match(['get','post'], '/service/add', [ServiceContrller::class, 'add'])->name('insert_service');
+        Route::match(['get'], '/service/delete/{id}', [ServiceContrller::class, 'delete'])->name('delete_service');
+        Route::match(['get','post'], '/service/edit/{id}', [ServiceContrller::class, 'edit'])->name('edit_service');
+        Route::match(['get'], '/service/view-delete-service', [ServiceContrller::class, 'view_delete'])->name('view_delete_service');
+        Route::match(['get'], '/service/force-delete-service/{id}', [ServiceContrller::class, 'force_delete'])->name('force_delete_service');
+        Route::match(['get'], '/service/restore-service/{id}', [ServiceContrller::class, 'restore'])->name('restore_delete_service');
         
         //KhuyenMai
         Route::match(['get'], '/khuyenmai', [KhuyenMaiController::class, 'getAll'])->name('khuyenmai');
@@ -88,7 +87,14 @@ Route::middleware(['auth'])->group(function ()  {
         Route::match(['get'], '/khuyenmai/delete/{id}', [KhuyenMaiController::class, 'delete'])->name('delete_khuyenmai');
         Route::match(['get'], '/khuyenmai/view-deleted', [KhuyenMaiController::class, 'view_delete'])->name('view_delete_khuyenmai');
         
-        
+        //Loai Phong
+        Route::match(['get'], '/typeroom', [LoaiPhongController::class, 'getAll'])->name('typeroom');
+        Route::match(['get','post'], '/typeroom/add', [LoaiPhongController::class, 'insert'])->name('insert_typeroom');
+        Route::match(['get','post'], '/typeroom/edit/{id}', [LoaiPhongController::class, 'update'])->name('edit_typeroom');
+        Route::match(['get'], '/typeroom/force/{id}', [LoaiPhongController::class, 'force'])->name('force_typeroom');
+        Route::match(['get'], '/typeroom/restore/{id}', [LoaiPhongController::class, 'restore'])->name('restore_typeroom');
+        Route::match(['get'], '/typeroom/delete/{id}', [LoaiPhongController::class, 'delete'])->name('delete_typeroom');
+        Route::match(['get'], '/typeroom/view-deleted', [LoaiPhongController::class, 'view_delete'])->name('view_delete_typeroom');
         
         
         
