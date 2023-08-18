@@ -9,16 +9,20 @@
             <div class="row gx-4">
                 <div class="col-auto">
                     <div class="avatar avatar-xl position-relative">
-                        <img src="../assets/img/bruce-mars.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        <img src="{{ Storage::url($profiles->image) }}" alt="profile_image"
+                            class="w-100 border-radius-lg shadow-sm">
                     </div>
                 </div>
                 <div class="col-auto my-auto">
                     <div class="h-100">
                         <h5 class="mb-1">
-                            Alec Thompson
+                            {{ $profiles->name }}
                         </h5>
+                        @php
+                            $array = changeColor($role, $profiles->role);
+                        @endphp
                         <p class="mb-0 font-weight-bold text-sm">
-                            CEO / Co-Founder
+                            {{ isset($array->name) ? $array->name : '' }}
                         </p>
                     </div>
                 </div>
@@ -95,7 +99,7 @@
                                 <h6 class="mb-0">Profile Information</h6>
                             </div>
                             <div class="col-md-4 text-end">
-                                <a href="javascript:;">
+                                <a href="{{ route('edit', ['id' => $profiles->id]) }}">
                                     <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip"
                                         data-bs-placement="top" title="Edit Profile"></i>
                                 </a>
@@ -104,7 +108,7 @@
                     </div>
                     <div class="card-body p-3">
                         <p class="text-sm">
-                            Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally
+                            Hi, I’m {{ $profiles->name }}, Decisions: If you can’t decide, the answer is no. If two equally
                             difficult paths,
                             choose the one more painful in the short term (pain avoidance is creating an illusion of
                             equality).
@@ -113,16 +117,14 @@
                         <ul class="list-group">
                             <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full
                                     Name:</strong>
-                                &nbsp; Alec M. Thompson</li>
+                                {{ $profiles->name }}</li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong>
-                                &nbsp; (44)
-                                123 1234 123</li>
+                                {{ $profiles->phone }}
+                            </li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
-                                &nbsp;
-                                alecthompson@mail.com</li>
+                                {{ $profiles->email }}</li>
                             <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong>
-                                &nbsp;
-                                USA</li>
+                                {{ $profiles->address }}</li>
                             <li class="list-group-item border-0 ps-0 pb-0">
                                 <strong class="text-dark text-sm">Social:</strong> &nbsp;
                                 <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="">
@@ -139,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-xl-4">
+            {{-- <div class="col-12 col-xl-4">
                 <div class="card h-100">
                     <div class="card-header pb-0 p-3">
                         <h6 class="mb-0">Conversations</h6>
@@ -201,7 +203,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 @endsection

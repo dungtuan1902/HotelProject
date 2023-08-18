@@ -56,6 +56,7 @@
                 <img id="image_preview" style="width: 200px ; height:100px" src="{{ Storage::url($detail->image) }}"
                     alt="User">
             </div>
+            @can('isAdmin')
             <div class="col-md-6">
                 @foreach ($role as $item)
                     <div class="form-check form-check-inline">
@@ -65,21 +66,9 @@
                             {{ $item->name }}</label>
                     </div>
                 @endforeach
-                {{-- <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" id="inlineRadio1" value="1"
-                        {{ $detail->role == 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="inlineRadio1">
-                        client</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" id="inlineRadio2" value="2"{{ $detail->role == 2 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="inlineRadio2">Staff</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="role" id="inlineRadio3" value="3"{{ $detail->role == 3 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="inlineRadio3">Admin</label>
-                </div> --}}
             </div>
+            @endcan
+            
             <div class="col-12">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>

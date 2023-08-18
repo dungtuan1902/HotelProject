@@ -97,11 +97,14 @@
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
+                                                @can('isAdmin')
                                                 <a onclick="return confirm('Are you sure ?')" href="{{ route('delete_khuyenmai', ['id' => $item->id]) }}"
                                                     class="my-3 btn btn-outline-danger text-danger fw-light  btn-sm"
                                                     data-toggle="tooltip" data-original-title="Delete user">
                                                     Delete
                                                 </a>
+                                                @endcan
+                                                
                                             </td>
                                         </tr>
                                     @endforeach

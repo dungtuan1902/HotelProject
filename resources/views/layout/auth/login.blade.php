@@ -21,6 +21,7 @@
                                             {{-- @if ($errors->has('email'))
                                                 <p><small class="px-2 text-danger">{{ $errors->first('email') }}</small></p>
                                             @endif --}}
+
                                         </div>
                                         <label>Password</label>
                                         <div class="mb-3">
@@ -38,6 +39,9 @@
                                                 checked="">
                                             <label class="form-check-label" for="rememberMe">Remember me</label>
                                         </div> --}}
+                                        @if (session('errors'))
+                                            <p class="text-danger px-2">{{ session('errors') }}</p>
+                                        @endif
                                         <div class="text-center">
                                             <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Sign
                                                 in</button>

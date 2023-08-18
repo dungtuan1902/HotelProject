@@ -62,7 +62,8 @@
                                         <tr>
                                             <td>
                                                 <div class="d-flex px-2 py-1">
-                                                    <div class="p-2 rounded-2 d-flex flex-column justify-content-center {{$item->color}}">
+                                                    <div
+                                                        class="p-2 rounded-2 d-flex flex-column justify-content-center {{ $item->color }}">
                                                         <h6 class="mb-0 text-sm text-white">{{ $item->name }}</h6>
                                                     </div>
                                                 </div>
@@ -80,17 +81,27 @@
                                                     class="text-secondary text-xs font-weight-bold">{{ $item->update_at == '' ? 'N/A' : $item->update_at }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a href="{{ route('edit_role', ['id' => $item->id]) }}"
-                                                    class="my-3 btn btn-outline-warning text-warning fw-light  btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
-                                                </a>
-                                                <a onclick="return confirm('Are you sure ?')"
-                                                    href="{{ route('delete_role', ['id' => $item->id]) }}"
-                                                    class="my-3 btn btn-outline-danger text-danger fw-light  btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Delete user">
-                                                    Delete
-                                                </a>
+                                                @can('isAdmin')
+                                                    <a href="{{ route('edit_role', ['id' => $item->id]) }}"
+                                                        class="my-3 btn btn-outline-warning text-warning fw-light  btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                        Edit
+                                                    </a>
+                                                    <a onclick="return confirm('Are you sure ?')"
+                                                        href="{{ route('delete_role', ['id' => $item->id]) }}"
+                                                        class="my-3 btn btn-outline-danger text-danger fw-light  btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Delete user">
+                                                        Delete
+                                                    </a>
+                                                @endcan
+                                                @cannot('isAdmin')
+                                                    <svg id="square" xmlns="http://www.w3.org/2000/svg" height="1.5em"
+                                                        viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                                        <path
+                                                            d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm79 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
+                                                    </svg>
+                                                @endcannot
+
                                             </td>
                                         </tr>
                                     @endforeach

@@ -28,7 +28,7 @@
                 <div class="col-lg-2">
                     <div class="logo">
                         <a href="./index.html">
-                            <img src="img/logo.png" alt="">
+                            <img src="{{Storage::url($hotel->logo)}}" alt="">
                         </a>
                     </div>
                 </div>
@@ -40,16 +40,27 @@
                                 <li><a href="{{ route('room_client') }}">Rooms</a></li>
                                 <li><a href="{{ route('about_client') }}">About Us</a></li>
                                 <li><a href="./pages.html">Pages</a>
-                                   
+
                                 </li>
                                 <li><a href="{{ route('contact_client') }}">Contact</a></li>
-                                <li><a href="{{route('login')}}">Login</a>
-                                    <ul class="dropdown">
-                                        <li><a href="{{route('register')}}">Register</a></li>
-                                        <li><a href="{{route('logout')}}">Logout</a></li>
-                                    </ul>
-                                </li>
-
+                                @can('isClient', $post)
+                                    <li><a href="{{ route('login') }}">Profile</a>
+                                        <ul class="dropdown">
+                                            {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
+                                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                @endcan
+                                @cannot('isClient', $post)
+                                    <li><a href="{{ route('login') }}">Login</a>
+                                        <ul class="dropdown">
+                                            <li><a href="{{ route('register') }}">Register</a></li>
+                                            <li><a href="">Forget Password</a></li>
+                                            {{-- <li><a href="">Register</a></li> --}}
+                                            {{-- <li><a href="{{ route('logout') }}">Logout</a></li> --}}
+                                        </ul>
+                                    </li>
+                                @endcannot
                             </ul>
                         </nav>
                         <div class="nav-right search-switch">

@@ -97,17 +97,20 @@
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
-                                                <a onclick="return confirm('Are you sure ?')"
-                                                    href="{{ route('delete_post', ['id' => $item->id]) }}"
-                                                    class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Delete
-                                                </a>
-                                                <a href="{{ route('detail_post', ['id' => $item->id]) }}"
-                                                    class="my-3 btn btn-outline-success text-success text-xs btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    View
-                                                </a>
+                                                @can('isAdmin')
+                                                    <a onclick="return confirm('Are you sure ?')"
+                                                        href="{{ route('delete_post', ['id' => $item->id]) }}"
+                                                        class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                        Delete
+                                                    </a>
+                                                    <a href="{{ route('detail_post', ['id' => $item->id]) }}"
+                                                        class="my-3 btn btn-outline-success text-success text-xs btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                        View
+                                                    </a>
+                                                @endcan
+
                                             </td>
                                         </tr>
                                     @endforeach

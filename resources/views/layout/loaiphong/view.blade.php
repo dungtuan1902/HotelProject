@@ -88,17 +88,20 @@
                                                     class="text-secondary text-xs font-weight-bold">{{ $item->created_at == '' ? '20/07/2023' : $item->created_at }}</span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a href="{{route('edit_typeroom',['id'=>$item->id])}}"
+                                                <a href="{{ route('edit_typeroom', ['id' => $item->id]) }}"
                                                     class="my-3 btn btn-outline-warning text-warning fw-light text-xs btn-sm"
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
-                                                <a onclick="return confirm('Are you sure ?')"
-                                                    href="{{ route('delete_typeroom', ['id' => $item->id]) }}"
-                                                    class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Delete
-                                                </a>
+                                                @can('isAdmin')
+                                                    <a onclick="return confirm('Are you sure ?')"
+                                                        href="{{ route('delete_typeroom', ['id' => $item->id]) }}"
+                                                        class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                        Delete
+                                                    </a>
+                                                @endcan
+
                                             </td>
                                         </tr>
                                     @endforeach

@@ -29,48 +29,53 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($hoaDon as $item)
-                                        <tr>
-                                            <td>
-                                                <div class="d-flex px-2 py-1">
-                                                    <div>
-                                                        <img src="{{ Storage::url($item->image) }}"
-                                                            class="avatar avatar-sm me-3" alt="user1">
+                                    @isset($hoaDon)
+                                        @foreach ($hoaDon as $item)
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex px-2 py-1">
+                                                        <div>
+                                                            <img src="{{ Storage::url($item->image) }}"
+                                                                class="avatar avatar-sm me-3" alt="user1">
+                                                        </div>
+                                                        <div class="d-flex flex-column justify-content-center">
+                                                            <h6 class="mb-0 text-sm">Bill {{ $item->id }}</h6>
+                                                            <p class="text-xs text-secondary mb-0">{{ $item->time }}</p>
+                                                        </div>
                                                     </div>
-                                                    <div class="d-flex flex-column justify-content-center">
-                                                        <h6 class="mb-0 text-sm">Bill {{ $item->id }}</h6>
-                                                        <p class="text-xs text-secondary mb-0">{{ $item->time }}</p>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <p class="text-xs font-weight-bold mb-0 ">
-                                                    {{ $item->pttt == 1 ? 'Direct payment' : 'online payment' }}
-                                                </p>
-                                            </td>
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm  {{ $item->status == 4 ? 'bg-gradient-success' : ($item->status == 3 ? 'bg-gradient-warning' : ($item->status == 2 ? 'bg-gradient-dark' : 'bg-gradient-secondary')) }}">
-                                                    {{ $item->status == 4 ? 'Done' : ($item->status == 3 ? 'Processing' : ($item->status == 2 ? 'not paid' : 'cancel')) }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <span
-                                                    class="text-secondary text-xs font-weight-bold">{{ $item->total }}</span>
-                                            </td>
-                                            <td class="align-middle text-center">
-                                                <a href=""
-                                                    class="my-3 btn btn-outline-warning text-warning fw-light  btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Edit
-                                                </a>
-                                                <a href=""
+                                                </td>
+                                                <td>
+                                                    <p class="text-xs font-weight-bold mb-0 ">
+                                                        {{ $item->pttt == 1 ? 'Direct payment' : 'online payment' }}
+                                                    </p>
+                                                </td>
+                                                <td class="align-middle text-center text-sm">
+                                                    <span
+                                                        class="badge badge-sm  {{ $item->status == 4 ? 'bg-gradient-success' : ($item->status == 3 ? 'bg-gradient-warning' : ($item->status == 2 ? 'bg-gradient-dark' : 'bg-gradient-secondary')) }}">
+                                                        {{ $item->status == 4 ? 'Done' : ($item->status == 3 ? 'Processing' : ($item->status == 2 ? 'not paid' : 'cancel')) }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <span
+                                                        class="text-secondary text-xs font-weight-bold">{{ $item->total }}</span>
+                                                </td>
+                                                <td class="align-middle text-center">
+                                                    <a href=""
+                                                        class="my-3 btn btn-outline-warning text-warning fw-light  btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                        Edit
+                                                    </a>
+                                                    @can('isAdmin')
+                                                    <a href=""
                                                     class="my-3 btn btn-outline-success text-success fw-light  btn-sm"
                                                     data-toggle="tooltip" data-original-title="View user">
                                                     View Detail
                                                 </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                                    @endcan
+                                                    
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endisset
                                 </tbody>
                             </table>
                         </div>

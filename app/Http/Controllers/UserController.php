@@ -7,6 +7,7 @@ use App\Models\Role;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Storage;
 use Hash;
@@ -17,14 +18,22 @@ class UserController extends Controller
 {
     public function getAll(Request $request)
     {
-        $title = 'List User';
-        $request_path = ucfirst($request->path());
-        // $user = DB::table('table_user')->join('table_role','table_user.role','=','table_role.id')->select('table_user.id','table_user.name','email','username','password','image','role','table_user.created_at')->get();
-        $user = User::all();
-        $role = Role::all();
+        if (Gate::allows('isAdmin')) {
+            $title = 'List User';
+            $request_path = ucfirst($request->path());
+            // $user = DB::table('table_user')->join('table_role','table_user.role','=','table_role.id')->select('table_user.id','table_user.name','email','username','password','image','role','table_user.created_at')->get();
+            $user = User::all();
+            $role = Role::all();
+            return view('layout.user.view', compact('title', 'request_path', 'user', 'role'));
+        } else {
+            $title = 'You do not have access';
+           
+            return view('layout.user.view', compact('title'));
+        }
+
         // dd($user);
 
-        return view('layout.user.view', compact('title', 'request_path', 'user', 'role'));
+
     }
     public function add(UserRequest $request)
     {
@@ -73,7 +82,7 @@ class UserController extends Controller
                     if ($deleteImage) {
                         $param['image'] = uploadFile('image', $request->file('image'));
                     }
-                }else{
+                } else {
                     $param['image'] = uploadFile('image', $request->file('image'));
                 }
 
@@ -151,7 +160,12 @@ class UserController extends Controller
     }
     public function profiles_detail()
     {
-        return view('layout.admin.profiles');
+        if (Auth::user()) {
+            $profiles = Auth::user();
+            // dd($profiles);
+            $role = Role::all();
+            return view('layout.admin.profiles',compact('profiles','role'));
+        }
     }
     public function login(UserRequest $request)
     {
@@ -160,9 +174,16 @@ class UserController extends Controller
             // dd($request->email);
             //su dung authencation auth::attemp kiem tra thong tin dang nhap
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                return redirect()->route('dashboard');
+                if (Auth::user()->role != 2) {
+                    return redirect()->route('dashboard');
+                } else {
+                    Session::flash('success', 'Login success');
+                    return redirect()->route('client');
+                }
+
             } else {
-                Session::flash('errors', 'Sai thong tin dang nhap');
+                // return redirect()->route('login')->with('error','Invalid password.'); 
+                Session::flash('errors', 'Wrong login information');
                 return redirect()->route('login');
             }
         }

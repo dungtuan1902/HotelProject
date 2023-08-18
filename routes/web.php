@@ -13,6 +13,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HotelController;
 
+use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
 
 // use Illuminate\Http\Request;
@@ -56,7 +57,7 @@ Route::middleware(['auth'])->group(function ()  {
         Route::match(['get'], '/user/view-delete', [UserController::class, 'view_delete'])->name('view-delete');
         Route::match(['get'], '/user/view-delete/delete/{id}', [UserController::class, 'force_delete'])->name('force_delete');
         Route::match(['get'], '/user/view-delete/restore/{id}', [UserController::class, 'force_restore'])->name('force_restore');
-        Route::match(['get'], '/user/profiles-detail', [UserController::class, 'profiles_detail'])->name('profiles_detail');//Trang ca nhan 
+        Route::match(['get'], '/user/profiles-detail', [UserController::class, 'profiles_detail'])->name('profiles_detail'); 
         
         //Phong
         Route::match(['get'], '/room', [PhongController::class, 'getAll'])->name('room');
@@ -96,9 +97,6 @@ Route::middleware(['auth'])->group(function ()  {
         Route::match(['get'], '/typeroom/view-deleted', [LoaiPhongController::class, 'view_delete'])->name('view_delete_typeroom');
         
         
-        
-        
-        
         //Setting
         Route::match(['get'], '/hotel', [HotelController::class, 'index'])->name('hotel');
         Route::match(['get','post'], '/hotel/edit', [HotelController::class, 'edit'])->name('edit_hotel');
@@ -134,6 +132,4 @@ Route::middleware(['auth'])->group(function ()  {
         Route::match(['get'], '/post/restore-post/{id}', [PostController::class, 'restore'])->name('restore_delete_post');
         Route::match(['get'], '/post/detail/{id}', [PostController::class, 'detail'])->name('detail_post');
     });
-    
-    
 });

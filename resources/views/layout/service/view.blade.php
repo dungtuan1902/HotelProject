@@ -88,12 +88,14 @@
                                                     data-toggle="tooltip" data-original-title="Edit user">
                                                     Edit
                                                 </a>
-                                                <a onclick="return confirm('Are you sure ?')"
-                                                    href="{{ route('delete_service', ['id' => $item->id]) }}"
-                                                    class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    Delete
-                                                </a>
+                                                @can('isAdmin')
+                                                    <a onclick="return confirm('Are you sure ?')"
+                                                        href="{{ route('delete_service', ['id' => $item->id]) }}"
+                                                        class="my-3 btn btn-outline-danger text-danger text-xs btn-sm"
+                                                        data-toggle="tooltip" data-original-title="Edit user">
+                                                        Delete
+                                                    </a>
+                                                @endcan
                                             </td>
                                         </tr>
                                     @endforeach
