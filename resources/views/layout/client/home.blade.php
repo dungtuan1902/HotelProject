@@ -9,13 +9,15 @@
                             <h1>{{ $hotel->name }}</h1>
                             <p>Here are the best hotel booking sites, including recommendations for international
                                 travel and for finding low-priced hotel rooms.</p>
-                            <a href="#" class="primary-btn">Discover Now</a>
+                            <a href="{{route('room_client')}}" class="primary-btn">Discover Now</a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                         <div class="booking-form">
+                            @csrf
                             <h3>Booking Your Hotel</h3>
-                            <form action="#">
+                            <form action="{{route('check')}}" method="POST">
+                                @csrf
                                 <div class="check-date">
                                     <label for="date-in">Check In:</label>
                                     <input type="text" class="date-input" id="date-in">
@@ -226,7 +228,7 @@
                                     </div>
                                     <h5> - Alexander Vasquez</h5>
                                 </div>
-                                <img src="img/testimonial-logo.png" alt="">
+                                {{-- <img src="img/testimonial-logo.png" alt=""> --}}
                             </div>
                             <div class="ts-item">
                                 <p>After a construction project took longer than expected, my husband, my daughter and I
@@ -245,7 +247,7 @@
                                     </div>
                                     <h5> - Alexander Vasquez</h5>
                                 </div>
-                                <img src="img/testimonial-logo.png" alt="">
+                                {{-- <img src="img/testimonial-logo.png" alt=""> --}}
                             </div>
                         </div>
                     </div>
@@ -268,9 +270,10 @@
                 <div class="row">
                     @foreach ($post as $item)
                         <div class="col-lg-4">
-                            <div class="blog-item set-bg" data-setbg="{{ Storage::url($item->image)}}">
+                            <div class="blog-item set-bg" data-setbg="{{ Storage::url($item->image) }}">
                                 <div class="bi-text">
-                                    <h4><a href="#"><span class="b-tag">{{ $item->title }}</span></a></h4>
+                                    <h4><a href="{{ route('page_detail_client', ['id' => $item->id]) }}"><span
+                                                class="b-tag">{{ $item->title }}</span></a></h4>
                                     <div class="b-time"><i class="icon_clock_alt"></i>{{ $item->created_at }}</div>
                                 </div>
                             </div>
