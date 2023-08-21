@@ -106,24 +106,24 @@
                                     <div class="d-flex align-items-center">
                                         <h5 class="my-2">You Rating:</h5>
                                         <div>
-                                            <input class="star star-5" id="star-5" type="radio" name="star"/>
+                                            <input class="star star-5" id="star-5" type="radio" name="star" />
 
                                             <label class="star star-5" for="star-5"></label>
-                                        
-                                            <input class="star star-4" id="star-4" type="radio" name="star"/>
-                                        
+
+                                            <input class="star star-4" id="star-4" type="radio" name="star" />
+
                                             <label class="star star-4" for="star-4"></label>
-                                        
-                                            <input class="star star-3" id="star-3" type="radio" name="star"/>
-                                        
+
+                                            <input class="star star-3" id="star-3" type="radio" name="star" />
+
                                             <label class="star star-3" for="star-3"></label>
-                                        
-                                            <input class="star star-2" id="star-2" type="radio" name="star"/>
-                                        
+
+                                            <input class="star star-2" id="star-2" type="radio" name="star" />
+
                                             <label class="star star-2" for="star-2"></label>
-                                        
-                                            <input class="star star-1" id="star-1" type="radio" name="star"/>
-                                        
+
+                                            <input class="star star-1" id="star-1" type="radio" name="star" />
+
                                             <label class="star star-1" for="star-1"></label>
                                         </div>
                                     </div>
@@ -138,15 +138,16 @@
                 <div class="col-lg-4">
                     <div class="room-booking">
                         <h3>Your Reservation</h3>
-                        <form action="#">
+                        <form action="{{ route('check') }}" method="POST">
+                            @csrf
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
+                                <input type="text" name="checkin" class="date-input" id="date-in">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
+                                <input type="text" name="checkout" class="date-input" id="date-out">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="select-option">
@@ -160,12 +161,12 @@
                             </div>
                             <div class="select-option">
                                 <label for="room">Room:</label>
-                                <select id="room">
+                                <select name="soPhong" id="room">
                                     <option value="1">1 Room</option>
                                     <option value="2">2 Room</option>
                                 </select>
                             </div>
-                            <input type="hidden" name="id_phong" value="{{ $detail->id }}">
+                            <input type="hidden" name="id_phong" value="{{$detail->id}}">
                             <button type="submit">Check Availability</button>
                         </form>
                     </div>

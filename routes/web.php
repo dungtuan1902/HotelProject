@@ -41,6 +41,7 @@ Route::match(['get', 'post'], '/profiles', [ClientController::class, 'profiles']
 
 Route::middleware(['client'])->group(function () {
     Route::match(['get', 'post'], '/check', [ClientController::class, 'check'])->name('check');
+    Route::match(['get', 'post'], '/bill', [ClientController::class, 'bill'])->name('bill_client');
 });
 
 

@@ -19,7 +19,7 @@ class LoaiPhongController extends Controller
         $typeRoom = TypeRoom::all();
         return view('layout.loaiphong.view', compact('title', 'request_path', 'typeRoom'));
     }
-    public function add(TypeRoomRequest $request)
+    public function insert(TypeRoomRequest $request)
     {
         if ($request->isMethod('post')) {
             $param = $request->post();

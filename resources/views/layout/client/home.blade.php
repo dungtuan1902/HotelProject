@@ -9,40 +9,53 @@
                             <h1>{{ $hotel->name }}</h1>
                             <p>Here are the best hotel booking sites, including recommendations for international
                                 travel and for finding low-priced hotel rooms.</p>
-                            <a href="{{route('room_client')}}" class="primary-btn">Discover Now</a>
+                            <a href="{{ route('room_client') }}" class="primary-btn">Discover Now</a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                         <div class="booking-form">
                             @csrf
                             <h3>Booking Your Hotel</h3>
-                            <form action="{{route('check')}}" method="POST">
+                            <form action="{{ route('check') }}" method="POST">
                                 @csrf
                                 <div class="check-date">
                                     <label for="date-in">Check In:</label>
-                                    <input type="text" class="date-input" id="date-in">
+                                    <input type="text" name="checkin" class="date-input" id="date-in">
                                     <i class="icon_calendar"></i>
                                 </div>
                                 <div class="check-date">
                                     <label for="date-out">Check Out:</label>
-                                    <input type="text" class="date-input" id="date-out">
+                                    <input type="text" name="checkout" class="date-input" id="date-out">
                                     <i class="icon_calendar"></i>
                                 </div>
                                 <div class="select-option">
                                     <label for="guest">Guests:</label>
-                                    <select id="guest">
-                                        <option value="">2 Adults</option>
-                                        <option value="">3 Adults</option>
+                                    <select name="soLuong" id="guest">
+                                        <option value="1">1 Adults</option>
+                                        <option value="2">2 Adults</option>
+                                        <option value="4">4 Adults</option>
+                                        <option value="8">8 Adults</option>
                                     </select>
                                 </div>
                                 <div class="select-option">
                                     <label for="room">Room:</label>
-                                    <select id="room">
+                                    <select name="soPhong" id="room">
                                         <option value="">1 Room</option>
                                         <option value="">2 Room</option>
                                     </select>
                                 </div>
+                                <input type="hidden" name="id_phong">
                                 <button type="submit">Check Availability</button>
+                                @if (Session::has('errors'))
+                                    <div class="alert alert-danger text-center mt-2" role="alert">
+                                        <strong>{{ Session('errors')->first('message1') }}
+                                        <span>
+                                            <a href="{{route('room_client')}}">Click here</a>
+                                        </span>
+                                        </strong>
+                                    </div>
+                                @endif
+
                             </form>
                         </div>
                     </div>

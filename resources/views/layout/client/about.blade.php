@@ -32,11 +32,9 @@
                     </div>
                     <div class="col-lg-5 offset-lg-1">
                         <ul class="ap-services">
-                            <li><i class="icon_check"></i> 20% Off On Accommodation.</li>
-                            <li><i class="icon_check"></i> Complimentary Daily Breakfast</li>
-                            <li><i class="icon_check"></i> 3 Pcs Laundry Per Day</li>
-                            <li><i class="icon_check"></i> Free Wifi.</li>
-                            <li><i class="icon_check"></i> Discount 20% On F&B</li>
+                            @foreach ($service as $item)
+                            <li><i class="icon_check"></i> {{$item->name}}</li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -100,7 +98,7 @@
                     <div class="col-sm-3">
                         <div class="gallery-item set-bg" data-setbg="{{ Storage::url($item->image) }}">
                             <div class="gi-text">
-                                <h3>Room Luxury</h3>
+                                <h3>{{$item->name}}</h3>
                             </div>
                         </div>
                     </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HoaDon;
 use App\Models\Service;
 use App\Models\TypeRoom;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ use Auth;
 use Storage;
 use Session;
 use App\Models\User;
+
 class ClientController extends Controller
 {
     protected $hotel;
@@ -103,7 +105,38 @@ class ClientController extends Controller
             return view('layout.client.profile', compact('hotel', 'user'));
         }
     }
-    public function check()  {
-        dd(123);
+    public function check(Request $request)
+    {
+        $hotel = $this->hotel;
+        $param = [];
+        $user = Auth::user();
+        if ($request->isMethod('post')) {
+            if (isset($request->id_phong)) {
+                $param = $request->post();
+                return view('layout.client.bill.bill', compact('hotel', 'param', 'user'));
+            }
+            return redirect()->back()->withErrors(['message1' => 'You need to choose a room to book'])->withInput();
+        }
+
+    }
+    public function bill(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $bill = new HoaDon();
+            $bill->id_phong = $request->id_phong;
+            $bill->id_user = Auth::user()->id;
+            $bill->id_km = $request->id_km == null ? 0 : $request->id_km;
+            $bill->soLuong = $request->soLuong;
+            $bill->checkin = date('Y-m-d', strtotime($request->checkin));
+            $bill->checkout = date('Y-m-d', strtotime($request->checkout));
+            $bill->pttt = $request->payment;
+            if ($bill->save()) {
+                Session::flash('success', 'Success');
+                return redirect()->route('room_client');
+            } else {
+                Session::flash('errors', 'Errors !');
+                return redirect()->back();
+            }
+        }
     }
 }

@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('table_hoa_don_detail', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_hd');
-            $table->integer('total');
-            $table->date('checkin');
-            $table->date('checkout');
-            $table->tinyInteger(2);
+            $table->string('phong_o');
+            $table->tinyInteger('status');
             $table->timestamps();
             $table->softDeletes();
         });
