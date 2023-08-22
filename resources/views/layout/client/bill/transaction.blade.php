@@ -1,11 +1,11 @@
 @extends('templates.client.layout')
 @section('content')
-    @if (Session::has('success'))
-        <div class="alert alert-success" role="alert">
-            <strong>{{ Session::get('success') }}</strong>
-        </div>
-    @endif
     <div class="container my-3">
+        @if (Session::has('success'))
+            <div class="alert alert-success" role="alert">
+                <strong>{{ Session::get('success') }}</strong>
+            </div>
+        @endif
         <div class="card">
             <div class="row">
                 <div class="col-2 ">
@@ -34,6 +34,7 @@
                             <th scope="col">Check out</th>
                             <th scope="col">Payment</th>
                             <th scope="col">Total</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,9 +57,11 @@
                                     {{ $item->pttt == 1 ? 'Direct payment' : 'Online payment' }}
                                 </td>
                                 <td>$ {{ $item->total }}</td>
+                                <td>
+                                    <a class="btn btn-danger" onclick="return confirm('Are you sure !')" href="{{ route('bill_cancel_client', ['id' => $item->id]) }}">Cancel</a>
+                                </td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
             </div>

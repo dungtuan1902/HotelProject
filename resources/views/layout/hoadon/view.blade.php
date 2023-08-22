@@ -99,7 +99,7 @@
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <span
-                                                        class="text-secondary text-xs font-weight-bold">{{ $item->total }}</span>
+                                                        class="text-secondary text-xs font-weight-bold">$ {{ $item->total }}</span>
                                                 </td>
                                                 <td class="align-middle text-center">
                                                     <a href="{{ route('process_bill', ['id' => $item->id]) }}"
@@ -107,13 +107,13 @@
                                                         data-toggle="tooltip" data-original-title="Edit user">
                                                         Process
                                                     </a>
-                                                    @can('isAdmin')
+                                                    {{-- @can('isAdmin')
                                                         <a href=""
                                                             class="my-3 btn btn-outline-success text-success fw-light  btn-sm"
                                                             data-toggle="tooltip" data-original-title="View user">
                                                             View Detail
                                                         </a>
-                                                    @endcan
+                                                    @endcan --}}
                                                 </td>
                                             </tr>
                                         @endforeach

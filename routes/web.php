@@ -12,6 +12,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HotelController;
+use App\Http\Controllers\BillController;
 
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -40,10 +41,11 @@ Route::match(['get'], '/page/{id}', [ClientController::class, 'page_detail'])->n
 Route::match(['get', 'post'], '/profiles', [ClientController::class, 'profiles'])->name('profiles_client');
 
 Route::middleware(['client'])->group(function () {
-    Route::match(['get', 'post'], '/check', [ClientController::class, 'check'])->name('check');
-    Route::match(['get', 'post'], '/bill', [ClientController::class, 'bill'])->name('bill_client');
-    Route::match(['get', 'post'], '/billconfirm', [ClientController::class, 'billconfirm'])->name('billconfirm_client');
-    Route::match(['get', 'post'], '/transaction', [ClientController::class, 'transaction'])->name('transaction_client');
+    Route::match(['get', 'post'], '/check', [BillController::class, 'check'])->name('check');
+    Route::match(['get', 'post'], '/bill', [BillController::class, 'bill'])->name('bill_client');
+    Route::match(['get', 'post'], '/billconfirm', [BillController::class, 'billconfirm'])->name('billconfirm_client');
+    Route::match(['get', 'post'], '/transaction', [BillController::class, 'transaction'])->name('transaction_client');
+    Route::match(['get'], '/bill-cancel/{id}', [BillController::class, 'bill_cancel'])->name('bill_cancel_client');
 });
 
 
@@ -121,7 +123,7 @@ Route::middleware(['auth'])->group(function () {
 
         //Hoa Don
         Route::match(['get'], '/bill', [HoaDonController::class, 'getAll'])->name('bill');
-        Route::match(['get','post'], '/bill/process/{id}', [HoaDonController::class, 'edit'])->name('process_bill');
+        Route::match(['get', 'post'], '/bill/process/{id}', [HoaDonController::class, 'edit'])->name('process_bill');
 
         //Role 
         Route::match(['get'], '/role', [RoleController::class, 'getAll'])->name('role');
