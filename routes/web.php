@@ -42,6 +42,8 @@ Route::match(['get', 'post'], '/profiles', [ClientController::class, 'profiles']
 Route::middleware(['client'])->group(function () {
     Route::match(['get', 'post'], '/check', [ClientController::class, 'check'])->name('check');
     Route::match(['get', 'post'], '/bill', [ClientController::class, 'bill'])->name('bill_client');
+    Route::match(['get', 'post'], '/billconfirm', [ClientController::class, 'billconfirm'])->name('billconfirm_client');
+    Route::match(['get', 'post'], '/transaction', [ClientController::class, 'transaction'])->name('transaction_client');
 });
 
 
@@ -119,6 +121,7 @@ Route::middleware(['auth'])->group(function () {
 
         //Hoa Don
         Route::match(['get'], '/bill', [HoaDonController::class, 'getAll'])->name('bill');
+        Route::match(['get','post'], '/bill/process/{id}', [HoaDonController::class, 'edit'])->name('process_bill');
 
         //Role 
         Route::match(['get'], '/role', [RoleController::class, 'getAll'])->name('role');

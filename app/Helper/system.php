@@ -20,4 +20,5 @@ function changeColor($array=[],$role) {
         }
     }
 }
+
 ?>

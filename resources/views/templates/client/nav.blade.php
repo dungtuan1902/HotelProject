@@ -27,8 +27,8 @@
             <div class="row">
                 <div class="col-lg-2">
                     <div class="logo">
-                        <a href="{{route('client')}}">
-                            <img width="200px" height="70px" src="{{Storage::url($hotel->logo)}}" alt="">
+                        <a href="{{ route('client') }}">
+                            <img width="200px" height="70px" src="{{ Storage::url($hotel->logo) }}" alt="">
                         </a>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                 <li class="active"><a href="{{ route('client') }}">Home</a></li>
                                 <li><a href="{{ route('room_client') }}">Rooms</a></li>
                                 <li><a href="{{ route('about_client') }}">About Us</a></li>
-                                <li><a href="{{route('page_client')}}">Pages</a>
+                                <li><a href="{{ route('page_client') }}">Pages</a>
 
                                 </li>
                                 <li><a href="{{ route('contact_client') }}">Contact</a></li>
@@ -47,6 +47,7 @@
                                     <li><a href="{{ route('profiles_client') }}">Profile</a>
                                         <ul class="dropdown">
                                             {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
+                                            <li><a href="{{ route('transaction_client') }}">Transaction history</a></li>
                                             <li><a href="{{ route('logout') }}">Logout</a></li>
                                         </ul>
                                     </li>

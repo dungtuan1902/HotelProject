@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::table('table_hoa_don', function (Blueprint $table) {
             $table->integer('total')->nullable()->after('pttt');
+            $table->integer('soPhong')->nullable()->after('soLuong');
         });
     }
 
@@ -22,6 +23,7 @@ return new class extends Migration {
     {
         Schema::table('table_hoa_don', function (Blueprint $table) {
             $table->dropColumn('total');
+            $table->dropColumn('soPhong');
         });
     }
 };
